@@ -5,6 +5,7 @@ import cors from "cors";
 import passport from "passport";
 import session from "express-session";
 import logger from "./utils/logger"
+import MongoStore from "connect-mongo";
 import { connect } from "./utils/database.connection"
 import { googleAuth } from './configs/google.auth'
 import { routesInit } from "./api/routes/index"
@@ -22,6 +23,7 @@ app.use(
         secret: config.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
+        store: MongoStore.create({ mongoUrl: config.DB_CONNECTION_STRING }),
         cookie: {
             secure: false,
             expires: new Date(Date.now() + 10000),
