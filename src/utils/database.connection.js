@@ -4,21 +4,23 @@ import logger from "./logger";
 
 let database;
 
-const connects = async() =>{
-   connects
-    const MONGODB_URL = config.DB_CONNECTION_STRING;  
-    
-    if(database) return;    
-    logger.info("Database ");
-    mongoose
-        .connect(MONGODB_URL)
-        .then((connection) => {
-          database = connection;
-          logger.info("Database Synced");
-        })
-        .catch((err) => {
-              logger.error(err.message);
-        });
+const connect = async () => {
+
+  const MONGODB_URL = config.DB_CONNECTION_STRING;
+
+  if (database) return;
+
+  mongoose.set('strictQuery', true);
+
+  mongoose
+    .connect("mongodb+srv://chalanis:eD3vHHTwX8xydp5Q@library-db-cluster.psdcotd.mongodb.net/?retryWrites=true&w=majority")
+    .then((connection) => {
+      database = connection;
+      logger.info("Database Synced");
+    })
+    .catch((err) => {
+      logger.error(err.message);
+    });
 };
 
-export {connects};
+export { connect };
