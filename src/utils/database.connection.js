@@ -13,7 +13,7 @@ const connect = async () => {
   mongoose.set('strictQuery', true);
 
   mongoose
-    .connect("mongodb+srv://chalanis:eD3vHHTwX8xydp5Q@library-db-cluster.psdcotd.mongodb.net/?retryWrites=true&w=majority")
+    .connect(config.DB_CONNECTION_STRING)
     .then((connection) => {
       database = connection;
       logger.info("Database Synced");

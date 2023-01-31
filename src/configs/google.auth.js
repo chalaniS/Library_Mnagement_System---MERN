@@ -8,12 +8,11 @@ const googleAuth = (passport) => {
 
   GoogleStratergy.Strategy;
 
-  console.log(config)
-
   passport.use(
     new GoogleStratergy(
       {
-        clientID: "201911271068-nl9b483k5qr00sumou9kq8mql5aritfj.apps.googleusercontent.com",
+        //  clientID: "201911271068-nl9b483k5qr00sumou9kq8mql5aritfj.apps.googleusercontent.com",
+        clientID: config.GOOGLE_CLIENT_ID,
         clientSecret: config.GOOGLE_CLIENT_SECRET,
         callbackURL: config.GOOGLE_REDIRECT_URL,
       },
@@ -22,7 +21,7 @@ const googleAuth = (passport) => {
         const userObj = {
           googleId: profile.id,
           displayName: profile.displayName,
-          gmail: profile.email[0].value,
+          gmail: profile.emails[0].value,
           image: profile.photos[0].value,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
